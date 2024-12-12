@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Filter Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .movie {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Kinolar </h1>
+    
+    <label for="movieInput">Kinolarni ismini yozing</label>
+    <input type="text" id="movieInput" placeholder="Type movie name" onkeyup="filterMovies()">
+    
+    <h3>kino</h3>
+    <ul id="movieList"></ul>
+
+    <script>
+        // Sample movie data (name and rating)
+        const movies = [
+            { name: "The Shawshank Redemption", rating: 9.3 },
+            { name: "The Dark Knight", rating: 9.0 },
+            { name: "Inception", rating: 8.8 },
+            { name: "Interstellar", rating: 8.6 },
+            { name: "The Matrix", rating: 8.7 },
+            { name: "Avengers: Endgame", rating: 8.4 },
+            { name: "Titanic", rating: 7.8 }
+        ];
+
+        // Function to display the movies in the list
+        function displayMovies(moviesList) {
+            const movieListElement = document.getElementById("movieList");
+            movieListElement.innerHTML = ''; // Clear the current movie list
+
+            moviesList.forEach(movie => {
+                const li = document.createElement('li');
+                li.classList.add('movie');
+                li.textContent = `${movie.name} (Rating: ${movie.rating})`;
+                movieListElement.appendChild(li);
+            });
+        }
+
+        // Initial display of all movies
+        displayMovies(movies);
+
+        // Function to filter movies based on user input
+        function filterMovies() {
+            const input = document.getElementById("movieInput").value.toLowerCase();
+
+            // Filter the movies based on the input (case-insensitive search)
+            const filteredMovies = movies.filter(movie => 
+                movie.name.toLowerCase().includes(input)
+            );
+
+            // Display the filtered movies
+            displayMovies(filteredMovies);
+        }
+    </script>
+</body>
+</html>
